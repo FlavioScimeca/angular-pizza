@@ -1,0 +1,37 @@
+<h1>Pizza</h1>
+<!-- NgModel e una direttiva tipica dei campi input
+e dunque è necessario imporatre i FormsModule
+-->
+<label for="nomePizza">Nome Pizza:</label>
+<input type="text" id="nomePizza" [(ngModel)]="nomePizza" />
+<br />
+<label for="nomePizza">Condimento:</label>
+<input type="text" id="nomePizza" [(ngModel)]="condimentoAgg" />
+
+<p>Stai scegliendo la seguente pizza: {{ nomePizza }} - {{ condimentoAgg }}</p>
+
+<button [disabled]="nomePizza == ''" (click)="onReset()">Reset pizza</button>
+<br />
+<!-- senza metodo -->
+<!-- <button
+  [disabled]="nomePizza == ''"
+  (click)="nomePizza = ''; condimentoAgg = ''"
+>
+  Reset senza metodo
+</button> -->
+<button (click)="onAggiungiPizza()">Aggiungi pizza</button>
+
+<div>
+  <h3>Lista pizze</h3>
+
+  <ul *ngIf="numPizze != 0; else noPizze">
+    <li *ngFor="let pizza of pizze; index as i">
+      n{{ i + 1 }} -- {{ pizza.nome }} -- {{ pizza.condimento }}
+    </li>
+    <p>total pizze = {{ numPizze }}</p>
+  </ul>
+  <!-- Local reference , vive solo nel Template -->
+  <ng-template #noPizze>
+    <p>nessuna</p>
+  </ng-template>
+</div>
